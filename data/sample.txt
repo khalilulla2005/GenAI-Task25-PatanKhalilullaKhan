@@ -1,0 +1,1 @@
+﻿GenAI and LangChain are powerful tools for building LLM applications. Retrieval-Augmented Generation (RAG) is a technique that grounds model responses in external data. FAISS is a library for fast vector similarity search.
