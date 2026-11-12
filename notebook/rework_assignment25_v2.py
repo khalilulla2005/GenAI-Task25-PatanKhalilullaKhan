@@ -117,6 +117,20 @@ for q in queries:
     print(f"Q: {q}\nA: {rag_chain.invoke(q)}")
 """)
 
-nb['cells'] = [text_cell_1, code_cell_1, text_cell_2, code_cell_2, text_cell_3, code_cell_3, text_cell_4, code_cell_4, text_cell_5, code_cell_5]
+# Markdown: Task 10
+text_cell_6 = nbf.v4.new_markdown_cell("""## Task 10: Observations & Insights
+1. **Why structured output is important:** Enables programmatic reliability and prevents LLM hallucination in data extraction.
+2. **Advantages of LCEL:** Provides first-class support for streaming, parallel execution, and built-in tracing/debugging.
+3. **Parallel vs Conditional:** Parallel chains maximize throughput for independent operations, while conditional routing optimizes logic based on query semantics.
+""")
+
+nb['cells'] = [
+    text_cell_1, code_cell_1, 
+    text_cell_2, code_cell_2, 
+    text_cell_3, code_cell_3, 
+    text_cell_4, code_cell_4, 
+    text_cell_5, code_cell_5,
+    text_cell_6
+]
 nbf.write(nb, 'D:\\techtude\\GenAI-Task25-PatanKhalilullaKhan\\notebook\\GenAI_Assignment25_Prompting_Chains.ipynb')
 print("Assignment 25 Reworked Notebook (Final Edition) generated!")
