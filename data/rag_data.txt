@@ -1,0 +1,1 @@
+﻿GenAI assignments cover various topics including NLP pipelines and RAG systems. LangChain provides excellent abstractions for these pipelines. FAISS allows for fast similarity searches. FastAPI is used for serving these models.

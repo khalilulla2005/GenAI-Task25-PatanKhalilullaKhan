@@ -1,9 +1,10 @@
 import nbformat as nbf
-from langchain_openai import ChatOpenAI
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_community.vectorstores import FAISS
 from langchain_core.prompts import PromptTemplate, ChatPromptTemplate
-from langchain_core.output_parsers import PydanticOutputParser, OutputFixingParser
+from langchain_core.output_parsers import PydanticOutputParser, StrOutputParser
+from langchain_core.runnables import RunnableBranch, RunnableParallel, RunnablePassthrough, RunnableLambda
 from pydantic import BaseModel, Field
-from langchain_core.runnables import RunnableBranch, RunnableParallel, RunnablePassthrough
 
 # Setup Notebook
 nb = nbf.v4.new_notebook()
@@ -41,14 +42,18 @@ nb['cells'].append(nbf.v4.new_markdown_cell("## Part 2: Structured Output & Fall
 nb['cells'].append(nbf.v4.new_code_cell("""# Task 3 & 4: Pydantic + Fallback
 class Answer(BaseModel):
     answer: str = Field(description="The main answer")
-    confidence: float = Field(description="Confidence score")
-    source: str = Field(description="Source")
+    confidence: float = Field(description="Confidence score (0-1)")
+    source: str = Field(description="The source of information")
 
 parser = PydanticOutputParser(pydantic_object=Answer)
 llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
 
-# Fallback using OutputFixingParser
-fix_parser = OutputFixingParser.from_llm(parser=parser, llm=llm)
+# Fallback using .with_fallbacks
+chain = (
+    ChatPromptTemplate.from_template("Answer query: {q}\n{format}")
+    | llm
+    | parser
+).with_fallbacks([RunnableLambda(lambda x: Answer(answer="Fallback", confidence=0.0, source="Error"))])
 print("=== Task 4: Fallback mechanism initialized ===")
 """))
 
