@@ -1,15 +1,16 @@
-﻿# Assignment 25: Prompting & LangChain Chains
+﻿# Assignment 25: Prompting & LangChain Chains (Reworked)
 
 **Student Name:** Patan Khalilulla Khan  
 **Course:** GenAI Training Program  
 
 ## Overview
-This assignment demonstrates advanced LangChain architectures using:
-- **Prompt Templates**: Dynamic system/human message templates.
-- **Structured Output**: Using Pydantic for reliable parsing.
-- **Complex Chains**: Implementing conditional and parallel execution logic.
-- **LCEL**: Building modular RAG pipelines with LangChain Expression Language.
+Production-level implementation of advanced LangChain concepts:
+- **LCEL Pipelines**: Full RAG implementation.
+- **RunnableBranch**: Dynamic conditional routing.
+- **RunnableParallel**: Concurrent LLM chain execution.
+- **Pydantic Structured Output**: Programmatic data extraction.
 
-## Repository Contents
-- `notebook/GenAI_Assignment25_Prompting_Chains.ipynb`: Primary assignment notebook.
-- `README.md`: Documentation.
+## How to Run
+1. Install dependencies: `pip install langchain-openai faiss-cpu langchain-community`
+2. Set API key: ` = 'your_key'`
+3. Run the Jupyter Notebook: `notebook/GenAI_Assignment25_Prompting_Chains.ipynb`
